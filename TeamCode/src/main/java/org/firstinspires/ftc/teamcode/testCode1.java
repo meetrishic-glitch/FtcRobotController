@@ -1,28 +1,34 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.DcMotor;
+
 public class testCode1 {
     private DcMotor leftBack;
     private DcMotor leftFront;
     private DcMotor rightBack;
     private DcMotor rightFront;
-    private DcMotor flyWheel;
+    private DcMotor flywheel;
     public void init( HardwareMap hwMap) {
 
-        telemetry.addLine("ready to run");
-        telemetry.update();
+
         rightBack = hwMap.get(DcMotor.class, "rightBack");
         rightFront = hwMap.get(DcMotor.class, "rightFront");
         leftBack = hwMap.get(DcMotor.class, "leftBack");
         leftFront = hwMap.get(DcMotor.class, "leftFront");
-        flyWheel = hwMap.get(DcMotor.class, "flyWheel");
+        flywheel = hwMap.get(DcMotor.class, "flywheel");
         rightBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         leftBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         leftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        flyWheel.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        flywheel.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        leftBack.setDirection(DcMotorSimple.Direction.REVERSE);
+        leftFront.setDirection(DcMotorSimple.Direction.REVERSE);
     }
 
     public void setMoterSpeed(String moterName, double speed) {
@@ -40,8 +46,8 @@ public class testCode1 {
             case "leftFront":
                 leftFront.setPower(speed);
                 break;
-            case "flyWheel":
-                flyWheel.setPower(speed);
+            case "flywheel":
+                flywheel.setPower(speed);
                 break;
             case "all drive":
                 rightBack.setPower(speed);
